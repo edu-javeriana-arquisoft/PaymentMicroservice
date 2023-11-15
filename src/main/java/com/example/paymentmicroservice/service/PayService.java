@@ -51,14 +51,27 @@ public class PayService {
         return payRepository.findPaysByCustomerId(customerId);
     }
 
-    public Charge onlinePayment() throws StripeException{
+    public Charge onlinePayment(double chargeAmount) throws StripeException {
         Stripe.apiKey = stripeApiKey;
         Map<String, Object> params = new HashMap<>();
-        params.put("amount", 1000); // Monto en centavos
-        params.put("currency", "usd");
-        params.put("source", "tok_visa"); // Token de tarjeta simulado
+        int amountInCents = (int) (chargeAmount * 100);
+        params.put("amount", amountInCents);
+        params.put("currency", "cop");
+        params.put("source", "tok_visa");
 
-        return Charge.create(params);
+        try {
+            Charge createdCharge = Charge.create(params);
+
+            if (createdCharge.getPaid()) {
+                System.out.println("Pago exitoso. ID de carga: " + createdCharge.getId());
+                return createdCharge;
+            } else {
+                System.out.println("El pago no se realizó. Estado: " + createdCharge.getStatus());
+            }
+        } catch (StripeException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
