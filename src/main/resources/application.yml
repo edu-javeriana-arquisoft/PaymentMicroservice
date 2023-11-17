@@ -1,0 +1,7 @@
+eureka:
+    client:
+      service-url:
+        defaultZone: http://10.43.100.41:8083/eureka
+spring:
+  application:
+    name: Payments-Microservice
