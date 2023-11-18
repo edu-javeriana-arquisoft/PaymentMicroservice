@@ -1,7 +1,12 @@
 version: '3.9'
 services:
-  PaymentMicroservice:
+  paymentmicroservice:
     build: .
     hostname: payments
     ports:
       - "8072:8072"
+    networks:
+      - default
+
+networks:
+  default:
