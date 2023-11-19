@@ -1,9 +1,10 @@
 version: '3.9'
 
 services:
-  tu-aplicacion:
+  payments-microservice:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8072:8080"
+      - "8095:8095"
