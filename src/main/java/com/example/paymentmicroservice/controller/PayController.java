@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/api/pays")
+@RequestMapping("pays")
 public class PayController {
     @Autowired
     private PayService payService;
